@@ -11,3 +11,9 @@
 .popup__close-button:hover {
   opacity: .6;
 }
+
+.popup__close-button:focus {
+  opacity: .6;
+  outline: none;
+  box-shadow: none;
+}

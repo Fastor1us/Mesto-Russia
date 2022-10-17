@@ -12,6 +12,12 @@
   opacity: .6;
 }
 
+.profile__add-button:focus {
+  opacity: .6;
+  outline: none;
+  box-shadow: none;
+}
+
 @media (min-width: 470px) and (max-width: 670px) {
   .profile__add-button {
     height: calc(50px - (670px - 100vw)/((670 - 470)/(50 - 120)));

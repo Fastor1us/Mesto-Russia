@@ -12,6 +12,12 @@
   opacity: .6;
 }
 
+.profile__edit-button:focus {
+  opacity: .6;
+  outline: none;
+  box-shadow: none;
+}
+
 @media (min-width: 470px) and (max-width: 670px) {
   .profile__edit-button {
     margin-left: calc(16px - (670px - 100vw)/((670 - 470)/(16 - 4)));
