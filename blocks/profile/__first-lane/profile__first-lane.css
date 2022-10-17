@@ -1,0 +1,5 @@
+.profile__first-lane {
+  display: flex;
+  align-items: baseline;
+  position: relative;
+}

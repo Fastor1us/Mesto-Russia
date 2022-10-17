@@ -1,0 +1,9 @@
+.cards {
+  margin-bottom: 69px;
+}
+
+@media (max-width: 880px) {
+  .cards {
+    margin-bottom: calc(66px - (880px - 100vw)/((880 - 320)/(66 - 48)));
+  }
+}
