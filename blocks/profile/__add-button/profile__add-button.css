@@ -5,7 +5,7 @@
   border-radius: 2px;
   position: absolute;
   right: 0;
-  background: url(../../../images/plus24px.svg) no-repeat center;
+  background: url(../../../images/plus.svg) no-repeat center;
 }
 
 .profile__add-button:hover {
@@ -14,8 +14,6 @@
 
 .profile__add-button:focus {
   opacity: .6;
-  outline: none;
-  box-shadow: none;
 }
 
 @media (min-width: 470px) and (max-width: 670px) {
@@ -27,7 +25,7 @@
 
 @media (max-width: 470px) {
   .profile__add-button {
-    background: url(../../../images/plus16px.svg) no-repeat center;
+    background-size: 16px;
     position: static;
     width: 282px;
   }

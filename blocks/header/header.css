@@ -2,10 +2,9 @@
   align-self: flex-start;
   margin-top: 45px;
   margin-bottom: 40px;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgba(84,84,84, .7);
   width: 100%;
   line-height: 0px;
-  /* box-sizing: border-box; */
 }
 
 @media (max-width: 880px) {

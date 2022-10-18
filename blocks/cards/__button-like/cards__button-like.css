@@ -25,6 +25,4 @@
 
 .cards__button-like:focus {
   opacity: .5;
-  outline: none;
-  box-shadow: none;
 }

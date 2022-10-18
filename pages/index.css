@@ -1,24 +1,14 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
+/* Сброс базовых стилей и общая стилизация кнопок */
+@import url(../blocks/button/button.css);
 
 /* Прародитель, блок page */
 @import url(../blocks/page/page.css);
 
-/* Модалка, блок popup */
-@import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/_opened/popup__opened.css);
-@import url(../blocks/popup/__container/popup__container.css);
-@import url(../blocks/popup/__close-button/popup__close-button.css);
-@import url(../blocks/popup/__title/popup__title.css);
-@import url(../blocks/popup/__text-input/popup__text-input.css);
-@import url(../blocks/popup/__confirm-button/popup__confirm-button.css);
-
 /* Шапка сайта, блок header */
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
-
-/* Main, блок content */
-@import url(../blocks/content/content.css);
 
 /* Секция, блок profile */
 @import url(../blocks/profile/profile.css);
@@ -42,3 +32,12 @@
 /* Секция, блок footer  */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+/* Модалка, блок popup */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup__opened.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__text-input/popup__text-input.css);
+@import url(../blocks/popup/__confirm-button/popup__confirm-button.css);

@@ -5,7 +5,7 @@
   height: 24px;
   box-sizing: border-box;
   border: 1px solid white;
-  background: url(../../../images/pen10px.svg) no-repeat center;
+  background: url(../../../images/pen.svg) no-repeat center;
 }
 
 .profile__edit-button:hover {
@@ -14,8 +14,6 @@
 
 .profile__edit-button:focus {
   opacity: .6;
-  outline: none;
-  box-shadow: none;
 }
 
 @media (min-width: 470px) and (max-width: 670px) {
@@ -26,7 +24,7 @@
 
 @media (max-width: 470px) {
   .profile__edit-button {
-    background: url(../../../images/pen7_5px.svg) no-repeat center;
+    background-size: 8px;
     margin-left: 0;
     width: 18px;
     height: 18px;

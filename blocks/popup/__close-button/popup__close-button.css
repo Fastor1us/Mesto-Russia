@@ -4,8 +4,7 @@
   background: url(../../../images/btn-cross.svg) no-repeat center;
   position: absolute;
   top: -40px;
-  right: -40px;
-  border: none;
+  right: -39px;
 }
 
 .popup__close-button:hover {
@@ -14,6 +13,20 @@
 
 .popup__close-button:focus {
   opacity: .6;
-  outline: none;
-  box-shadow: none;
+}
+
+@media (min-width: 470px) and (max-width: 670px) {
+  .popup__close-button {
+    right: calc(-40px - (670px - 100vw)/((670 - 470)/(-40)));
+  }
+}
+
+@media (max-width: 470px) {
+  .popup__close-button {
+    background: url(../../../images/btn-cross_20x20.svg) no-repeat center;
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
 }

@@ -3,7 +3,6 @@
   line-height: 29px;
   font-weight: 900;
   margin: 25px 0 25px 21px;
-
   max-width: 200px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -19,11 +18,5 @@
 @media (min-width: 470px) and (max-width: 690px) {
   .cards__title {
     max-width: calc(200px - (690px - 100vw)/((690 - 470)/(200 - 150)));
-  }
-}
-
-@media (max-width: 470px) {
-  .cards__title {
-    max-width: 200px;
   }
 }
