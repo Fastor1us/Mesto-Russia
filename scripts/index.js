@@ -41,6 +41,7 @@ const cardsContainer = document.querySelector('.cards__list')
 /********************   ACTIONS   ********************/
 
 addInitialCards(initialCards)
+// wastebasketInitialHandler()
 
 profileEditButton.addEventListener('click', () => {
     openPopup()
@@ -109,17 +110,21 @@ function addCard () {
   cardElement.querySelector('.cards__image').setAttribute('alt', popupInputs[0].value)
   cardElement.querySelector('.cards__title').textContent = popupInputs[0].value
 
+  wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
+
   cardsContainer.prepend(cardElement)
 }
 
 function addInitialCards (cardsArray) {
-  cardsArray.forEach( (item, index) => {
+  cardsArray.forEach( (item) => {
     const cardTemplate = document.querySelector('#card-template').content
     const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true)
 
     cardElement.querySelector('.cards__image').setAttribute('src', item.link)
     cardElement.querySelector('.cards__image').setAttribute('alt', item.name)
     cardElement.querySelector('.cards__title').textContent = item.name
+
+    wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
 
     cardsContainer.append(cardElement)
   })
@@ -132,4 +137,11 @@ function FillPopupFields (a, b ,c ,d, e,f) {
   popupInputs[1].value = d
   popupInputs[1].placeholder = e
   popupConfirmButton.textContent = f
+}
+
+function wastebasketHandler (item) {
+    item.addEventListener('click',
+    function () {
+      item.parentElement.remove()
+    })
 }
