@@ -8,4 +8,9 @@
   width: min(100%, 880px);
   margin: 0 auto;
   background-color: black;
+  min-height: 100vh;
+}
+
+.header + * {
+  flex-grow: 1;
 }
