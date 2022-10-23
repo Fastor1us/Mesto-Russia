@@ -1,4 +1,30 @@
 /********************   DATA   ********************/
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
 const popup = document.querySelector('.popup')
 const popupInputs = popup.querySelectorAll('.popup__text-input')
@@ -13,6 +39,8 @@ const profileAddButton = document.querySelector('.profile__add-button')
 const cardsContainer = document.querySelector('.cards__list')
 
 /********************   ACTIONS   ********************/
+
+addInitialCards(initialCards)
 
 profileEditButton.addEventListener('click', () => {
     openPopup()
@@ -82,6 +110,19 @@ function addCard () {
   cardElement.querySelector('.cards__title').textContent = popupInputs[0].value
 
   cardsContainer.prepend(cardElement)
+}
+
+function addInitialCards (cardsArray) {
+  cardsArray.forEach( (item, index) => {
+    const cardTemplate = document.querySelector('#card-template').content
+    const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true)
+
+    cardElement.querySelector('.cards__image').setAttribute('src', item.link)
+    cardElement.querySelector('.cards__image').setAttribute('alt', item.name)
+    cardElement.querySelector('.cards__title').textContent = item.name
+
+    cardsContainer.append(cardElement)
+  })
 }
 
 function FillPopupFields (a, b ,c ,d, e,f) {
