@@ -28,6 +28,7 @@
 @import url(../blocks/cards/__discription/cards__discription.css);
 @import url(../blocks/cards/__title/cards__title.css);
 @import url(../blocks/cards/__button-like/cards__button-like.css);
+@import url(../blocks/cards/__wastebasket/cards__wastebasket.css);
 
 /* Секция, блок footer  */
 @import url(../blocks/footer/footer.css);

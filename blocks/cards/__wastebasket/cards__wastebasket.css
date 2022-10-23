@@ -1,0 +1,13 @@
+.cards__wastebasket {
+  width: 18px;
+  height: 19px;
+  background-image: url(../../../images/wastebasket.svg);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.cards__wastebasket:hover {
+  cursor: pointer;
+  opacity: .6;
+}

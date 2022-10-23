@@ -1,4 +1,30 @@
 /********************   DATA   ********************/
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
 const popup = document.querySelector('.popup')
 const popupInputs = popup.querySelectorAll('.popup__text-input')
@@ -14,25 +40,32 @@ const cardsContainer = document.querySelector('.cards__list')
 
 /********************   ACTIONS   ********************/
 
+addInitialCards(initialCards)
+// wastebasketInitialHandler()
+
 profileEditButton.addEventListener('click', () => {
     openPopup()
-    popupTitle.textContent = 'Редактировать профиль'
-    popupInputs[0].value = profileTitle.textContent
-    popupInputs[0].placeholder = 'Имя'
-    popupInputs[1].value = profileSubtitle.textContent
-    popupInputs[1].placeholder = 'Описание'
-    popupConfirmButton.textContent = 'Сохранить'
+    FillPopupFields(
+      'Редактировать профиль',
+      profileTitle.textContent,
+      'Имя',
+      profileSubtitle.textContent,
+      'Описание',
+      'Сохранить'
+    )
   }
 )
 
 profileAddButton.addEventListener('click', () => {
     openPopup()
-    popupTitle.textContent = 'Новое место'
-    popupInputs[0].value = ''
-    popupInputs[0].placeholder = 'Название'
-    popupInputs[1].value = ''
-    popupInputs[1].placeholder = 'Ссылка на картинку'
-    popupConfirmButton.textContent = 'Создать'
+    FillPopupFields(
+      'Новое место',
+      '',
+      'Название',
+      '',
+      'Ссылка на картинку',
+      'Создать'
+    )
   }
 )
 
@@ -77,5 +110,38 @@ function addCard () {
   cardElement.querySelector('.cards__image').setAttribute('alt', popupInputs[0].value)
   cardElement.querySelector('.cards__title').textContent = popupInputs[0].value
 
+  wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
+
   cardsContainer.prepend(cardElement)
+}
+
+function addInitialCards (cardsArray) {
+  cardsArray.forEach( (item) => {
+    const cardTemplate = document.querySelector('#card-template').content
+    const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true)
+
+    cardElement.querySelector('.cards__image').setAttribute('src', item.link)
+    cardElement.querySelector('.cards__image').setAttribute('alt', item.name)
+    cardElement.querySelector('.cards__title').textContent = item.name
+
+    wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
+
+    cardsContainer.append(cardElement)
+  })
+}
+
+function FillPopupFields (a, b ,c ,d, e,f) {
+  popupTitle.textContent = a
+  popupInputs[0].value = b
+  popupInputs[0].placeholder = c
+  popupInputs[1].value = d
+  popupInputs[1].placeholder = e
+  popupConfirmButton.textContent = f
+}
+
+function wastebasketHandler (item) {
+    item.addEventListener('click',
+    function () {
+      item.parentElement.remove()
+    })
 }
