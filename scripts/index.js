@@ -16,23 +16,27 @@ const cardsContainer = document.querySelector('.cards__list')
 
 profileEditButton.addEventListener('click', () => {
     openPopup()
-    popupTitle.textContent = 'Редактировать профиль'
-    popupInputs[0].value = profileTitle.textContent
-    popupInputs[0].placeholder = 'Имя'
-    popupInputs[1].value = profileSubtitle.textContent
-    popupInputs[1].placeholder = 'Описание'
-    popupConfirmButton.textContent = 'Сохранить'
+    FillPopupFields(
+      'Редактировать профиль',
+      profileTitle.textContent,
+      'Имя',
+      profileSubtitle.textContent,
+      'Описание',
+      'Сохранить'
+    )
   }
 )
 
 profileAddButton.addEventListener('click', () => {
     openPopup()
-    popupTitle.textContent = 'Новое место'
-    popupInputs[0].value = ''
-    popupInputs[0].placeholder = 'Название'
-    popupInputs[1].value = ''
-    popupInputs[1].placeholder = 'Ссылка на картинку'
-    popupConfirmButton.textContent = 'Создать'
+    FillPopupFields(
+      'Новое место',
+      '',
+      'Название',
+      '',
+      'Ссылка на картинку',
+      'Создать'
+    )
   }
 )
 
@@ -78,4 +82,13 @@ function addCard () {
   cardElement.querySelector('.cards__title').textContent = popupInputs[0].value
 
   cardsContainer.prepend(cardElement)
+}
+
+function FillPopupFields (a, b ,c ,d, e,f) {
+  popupTitle.textContent = a
+  popupInputs[0].value = b
+  popupInputs[0].placeholder = c
+  popupInputs[1].value = d
+  popupInputs[1].placeholder = e
+  popupConfirmButton.textContent = f
 }
