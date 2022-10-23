@@ -1,7 +1,8 @@
 /********************   DATA   ********************/
-
 const popup = document.querySelector('.popup')
 const popupInputs = popup.querySelectorAll('.popup__text-input')
+const popupCloseButton = popup.querySelector('.popup__close-button')
+const popupTitle = popup.querySelector('.popup__title')
 const popupConfirmButton = popup.querySelector('.popup__confirm-button')
 const profileTitle = document.querySelector('.profile__title')
 const profileSubtitle = document.querySelector('.profile__subtitle')
@@ -10,10 +11,9 @@ const profileAddButton = document.querySelector('.profile__add-button')
 
 /********************   ACTIONS   ********************/
 
-profileEditButton.addEventListener('click',
-  function () {
+profileEditButton.addEventListener('click', () => {
     openPopup()
-    popup.querySelector('.popup__title').textContent = 'Редактировать профиль'
+    popupTitle.textContent = 'Редактировать профиль'
     popupInputs[0].value = profileTitle.textContent
     popupInputs[0].placeholder = 'Имя'
     popupInputs[1].value = profileSubtitle.textContent
@@ -22,17 +22,19 @@ profileEditButton.addEventListener('click',
   }
 )
 
-profileAddButton.addEventListener('click',
-  function () {
+profileAddButton.addEventListener('click', () => {
     openPopup()
+    popupTitle.textContent = 'Новое место'
+    popupInputs[0].value = ''
+    popupInputs[0].placeholder = 'Название'
+    popupInputs[1].value = ''
+    popupInputs[1].placeholder = 'Ссылка на картинку'
+    popupConfirmButton.textContent = 'Создать'
   }
 )
 
-popup.querySelector('.popup__close-button').addEventListener('click',
-  function () {
-    if (popup.classList.contains('popup_opened')) {
-      popup.classList.remove('popup_opened')
-    }
+popupCloseButton.addEventListener('click', () => {
+    popup.classList.remove('popup_opened')
   }
 )
 
