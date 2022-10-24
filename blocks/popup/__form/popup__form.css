@@ -1,4 +1,4 @@
-.popup__container {
+.popup__form {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -17,7 +17,7 @@
 }
 
 @media (max-width: 470px) {
-  .popup__container {
+  .popup__form {
     padding: 0 calc(36px - (470px - 100vw)/((470 - 320)/(36 - 22))) 0 ;
     width: calc(430px - (470px - 100vw)/((470 - 320)/(430 - 282)));
   }
