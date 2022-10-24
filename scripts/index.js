@@ -28,10 +28,11 @@ const initialCards = [
 
 const popup = document.querySelector('.popup')
 const popupInputs = popup.querySelectorAll('.popup__text-input')
-const popupCloseButton = popup.querySelector('.popup__close-button')
+const popupCloseButton = popup.querySelectorAll('.popup__close-button')
 const popupTitle = popup.querySelector('.popup__title')
 const popupConfirmButton = popup.querySelector('.popup__confirm-button')
 const popupContainer = popup.querySelector('.popup__container')
+const popupFigure = popup.querySelector('.popup__figure')
 const profileTitle = document.querySelector('.profile__title')
 const profileSubtitle = document.querySelector('.profile__subtitle')
 const profileEditButton = document.querySelector('.profile__edit-button')
@@ -41,10 +42,9 @@ const cardsContainer = document.querySelector('.cards__list')
 /********************   ACTIONS   ********************/
 
 addInitialCards(initialCards)
-// wastebasketInitialHandler()
 
 profileEditButton.addEventListener('click', () => {
-    openPopup()
+    openPopup(popupContainer)
     FillPopupFields(
       'Редактировать профиль',
       profileTitle.textContent,
@@ -57,7 +57,7 @@ profileEditButton.addEventListener('click', () => {
 )
 
 profileAddButton.addEventListener('click', () => {
-    openPopup()
+    openPopup(popupContainer)
     FillPopupFields(
       'Новое место',
       '',
@@ -92,15 +92,33 @@ document.querySelectorAll('.cards__button-like').forEach(
   }
 )
 
-popupCloseButton.addEventListener('click', () => {
-  closePopup()
-}
+popupCloseButton.forEach( (item) => {
+    item.addEventListener('click', () => {
+      closePopup()
+    })
+  }
 )
 
 /********************   FUNCTIONS   ********************/
 
-function openPopup () { popup.classList.add('popup_opened') }
-function closePopup () { popup.classList.remove('popup_opened') }
+function openPopup (item) {
+  popup.classList.add('popup_opened')
+  if (item.hasAttribute('src')) {
+    popupFigure.classList.add('popup_opened')
+    popup.querySelector('.popup__image').src = item.src
+  } else {
+    item.classList.add('popup_opened')
+  }
+}
+
+function closePopup () {
+  popup.classList.remove('popup_opened')
+  if (popupContainer.classList.contains('popup_opened')) {
+    popupContainer.classList.remove('popup_opened')
+  } else {
+    popupFigure.classList.remove('popup_opened')
+  }
+}
 
 function addCard () {
   const cardTemplate = document.querySelector('#card-template').content
@@ -111,6 +129,7 @@ function addCard () {
   cardElement.querySelector('.cards__title').textContent = popupInputs[0].value
 
   wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
+  imageClickHandler(cardElement.querySelector('.cards__image'))
 
   cardsContainer.prepend(cardElement)
 }
@@ -125,6 +144,7 @@ function addInitialCards (cardsArray) {
     cardElement.querySelector('.cards__title').textContent = item.name
 
     wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
+    imageClickHandler(cardElement.querySelector('.cards__image'))
 
     cardsContainer.append(cardElement)
   })
@@ -140,8 +160,15 @@ function FillPopupFields (a, b ,c ,d, e,f) {
 }
 
 function wastebasketHandler (item) {
-    item.addEventListener('click',
-    function () {
-      item.parentElement.remove()
-    })
+  item.addEventListener('click',
+  function () {
+    item.parentElement.remove()
+  })
+}
+
+function imageClickHandler (item) {
+  item.addEventListener('click',
+  function () {
+    openPopup(item)
+  })
 }
