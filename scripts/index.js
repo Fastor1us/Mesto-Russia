@@ -26,158 +26,111 @@ const initialCards = [
   }
 ];
 
-const popup = document.querySelector('.popup')
-const popupInputs = popup.querySelectorAll('.popup__text-input')
-const popupCloseButtons = popup.querySelectorAll('.popup__close-button')
-const popupTitle = popup.querySelector('.popup__title')
-const popupConfirmButton = popup.querySelector('.popup__confirm-button')
-const popupContainer = popup.querySelector('.popup__container')
-const popupFigure = popup.querySelector('.popup__figure')
-const profileTitle = document.querySelector('.profile__title')
-const profileSubtitle = document.querySelector('.profile__subtitle')
-const profileEditButton = document.querySelector('.profile__edit-button')
-const profileAddButton = document.querySelector('.profile__add-button')
+const popupCloseButtons = document.querySelectorAll('.popup__close-button')
+
+const popupProfileContainer = document.querySelector('#popup-profile')
+const popupProfileInputName = popupProfileContainer.querySelector('#popup-profile-title')
+const popupProfileInputDescription = popupProfileContainer.querySelector('#popup-profile-description')
+
+const popupCardContainer = document.querySelector('#popup-card')
+const popupCardName = popupCardContainer.querySelector('#popup-card-name')
+const popupCardLink = popupCardContainer.querySelector('#popup-card-link')
+
+const popupImageContainer = document.querySelector('#popup-image')
+const popupImage = popupImageContainer.querySelector('.popup__image')
+const popupFigcaption = popupImageContainer.querySelector('.popup__figcaption')
+
+const profile = document.querySelector('.profile')
+const profileTitle = profile.querySelector('.profile__title')
+const profileSubtitle = profile.querySelector('.profile__subtitle')
+const profileEditButton = profile.querySelector('.profile__edit-button')
+const profileAddButton = profile.querySelector('.profile__add-button')
+
+const cardTemplate = document.querySelector('#card-template').content
+
 const cardsContainer = document.querySelector('.cards__list')
 
 /********************   ACTIONS   ********************/
 
-addInitialCards(initialCards)
+initialCards.forEach( (card) => {
+  cardsContainer.append(addCard(card.name, card.link))
+})
 
 profileEditButton.addEventListener('click', () => {
-    openPopup(popupContainer)
-    FillPopupFields(
-      'Редактировать профиль',
-      profileTitle.textContent,
-      'Имя',
-      profileSubtitle.textContent,
-      'Описание',
-      'Сохранить'
-    )
-  }
-)
+  openPopup(popupProfileContainer)
+  popupProfileInputName.value = profileTitle.textContent
+  popupProfileInputDescription.value = profileSubtitle.textContent
+})
 
 profileAddButton.addEventListener('click', () => {
-    openPopup(popupContainer)
-    FillPopupFields(
-      'Новое место',
-      '',
-      'Название',
-      '',
-      'Ссылка на картинку',
-      'Создать'
-    )
-  }
-)
-
-popupContainer.addEventListener('submit', (EventTarget) => {
-    EventTarget.preventDefault()
-    switch (popupTitle.textContent) {
-      case 'Редактировать профиль':
-        profileTitle.textContent = popupInputs[0].value
-        profileSubtitle.textContent = popupInputs[1].value
-        break
-      case 'Новое место':
-        addCard()
-    }
-    closePopup()
-  }
-)
+  openPopup(popupCardContainer)
+  popupCardName.value = ''
+  popupCardLink.value = ''
+})
 
 popupCloseButtons.forEach( (item) => {
-    item.addEventListener('click', () => {
-      closePopup()
-    })
-  }
-)
+  item.addEventListener('click', () => {
+    closePopup(item.closest('.popup'))
+  })
+})
+
+popupProfileContainer.addEventListener('submit', (evt) => {
+  evt.preventDefault()
+  profileTitle.textContent = popupProfileInputName.value
+  profileSubtitle.textContent = popupProfileInputDescription.value
+  closePopup(popupProfileContainer)
+})
+
+popupCardContainer.addEventListener('submit', (evt) => {
+  evt.preventDefault()
+  cardsContainer.prepend(addCard(popupCardName.value, popupCardLink.value))
+  closePopup(popupCardContainer)
+})
 
 /********************   FUNCTIONS   ********************/
 
-function openPopup (item) {
-  popup.classList.add('popup_opened')
-  if (item.hasAttribute('src')) {
-    const popupImage = popup.querySelector('.popup__image')
-    const cardTitleTextContent = item.parentElement.querySelector('.cards__title').textContent
-
-    popupFigure.classList.add('popup_opened')
-    popupImage.src = item.src
-    popupImage.alt = cardTitleTextContent
-    popup.querySelector('.popup__figcaption').textContent = cardTitleTextContent
-  } else {
-    item.classList.add('popup_opened')
-  }
+function openPopup(popupNode) {
+  popupNode.classList.add('popup_opened')
 }
 
-function closePopup () {
-  popup.classList.remove('popup_opened')
-  if (popupContainer.classList.contains('popup_opened')) {
-    popupContainer.classList.remove('popup_opened')
-  } else {
-    popupFigure.classList.remove('popup_opened')
-  }
+function closePopup(popupNode) {
+  popupNode.classList.remove('popup_opened')
 }
 
-function addCard () {
-  const cardTemplate = document.querySelector('#card-template').content
+function addCard(name, link) {
   const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true)
+  const cardImage = cardElement.querySelector('.cards__image')
 
-  cardElement.querySelector('.cards__image').setAttribute('src', popupInputs[1].value)
-  cardElement.querySelector('.cards__image').setAttribute('alt', popupInputs[0].value)
-  cardElement.querySelector('.cards__title').textContent = popupInputs[0].value
+  cardElement.querySelector('.cards__title').textContent = name
+  cardImage.setAttribute('alt', name)
+  cardImage.setAttribute('src', link)
 
-  wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
-  ButtonLikeHandler(cardElement.querySelector('.cards__button-like'))
-  imageClickHandler(cardElement.querySelector('.cards__image'))
+  cardElement.querySelector('.cards__wastebasket').addEventListener('click', () => {
+    cardElement.remove()
+  })
 
-  cardsContainer.prepend(cardElement)
+  addCardImageHandler(cardImage, name, link)
+  addButtonLikeHandler(cardElement.querySelector('.cards__button-like'))
+
+  return cardElement
 }
 
-function addInitialCards (cardsArray) {
-  cardsArray.forEach( (item) => {
-    const cardTemplate = document.querySelector('#card-template').content
-    const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true)
-
-    cardElement.querySelector('.cards__image').setAttribute('src', item.link)
-    cardElement.querySelector('.cards__image').setAttribute('alt', item.name)
-    cardElement.querySelector('.cards__title').textContent = item.name
-
-    wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
-    ButtonLikeHandler(cardElement.querySelector('.cards__button-like'))
-    imageClickHandler(cardElement.querySelector('.cards__image'))
-
-    cardsContainer.append(cardElement)
+function addCardImageHandler(imageNode, name, link) {
+  imageNode.addEventListener('click', () => {
+    openPopup(popupImageContainer)
+    popupImage.setAttribute('src', link)
+    popupImage.setAttribute('alt', name)
+    popupFigcaption.textContent = name
   })
 }
 
-function FillPopupFields (a, b ,c ,d, e,f) {
-  popupTitle.textContent = a
-  popupInputs[0].value = b
-  popupInputs[0].placeholder = c
-  popupInputs[1].value = d
-  popupInputs[1].placeholder = e
-  popupConfirmButton.textContent = f
-}
-
-function wastebasketHandler (item) {
-  item.addEventListener('click',
+function addButtonLikeHandler (itemNode) {
+  itemNode.addEventListener('click',
   function () {
-    item.parentElement.remove()
+    itemNode.classList.toggle('cards__button-like_active')
   })
-}
-
-function ButtonLikeHandler (item) {
-  item.addEventListener('click',
+  itemNode.addEventListener('mouseout',
   function () {
-    item.classList.toggle('cards__button-like_active')
-  })
-  item.addEventListener('mouseout',
-  function () {
-    item.blur()
-  })
-}
-
-function imageClickHandler (item) {
-  item.addEventListener('click',
-  function () {
-    openPopup(item)
+    itemNode.blur()
   })
 }
