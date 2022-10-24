@@ -28,6 +28,7 @@
 @import url(../blocks/cards/__discription/cards__discription.css);
 @import url(../blocks/cards/__title/cards__title.css);
 @import url(../blocks/cards/__button-like/cards__button-like.css);
+@import url(../blocks/cards/__button-like/_active/cards__button-like_active.css);
 @import url(../blocks/cards/__wastebasket/cards__wastebasket.css);
 
 /* Секция, блок footer  */
@@ -36,9 +37,13 @@
 
 /* Модалка, блок popup */
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/_opened/popup__opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__text-input/popup__text-input.css);
 @import url(../blocks/popup/__confirm-button/popup__confirm-button.css);
+@import url(../blocks/popup/__figure/popup__figure.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__figcaption/popup__figcaption.css);
+@import url(../blocks/popup/_smooth-transition/popup_smooth-transition.css);
+@import url(../blocks/popup/_opened/popup__opened.css);
