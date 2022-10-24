@@ -1,0 +1,5 @@
+.popup_smooth-transition {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .4s, opacity .4s linear;
+}
