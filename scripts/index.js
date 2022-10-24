@@ -28,7 +28,7 @@ const initialCards = [
 
 const popup = document.querySelector('.popup')
 const popupInputs = popup.querySelectorAll('.popup__text-input')
-const popupCloseButton = popup.querySelectorAll('.popup__close-button')
+const popupCloseButtons = popup.querySelectorAll('.popup__close-button')
 const popupTitle = popup.querySelector('.popup__title')
 const popupConfirmButton = popup.querySelector('.popup__confirm-button')
 const popupContainer = popup.querySelector('.popup__container')
@@ -83,7 +83,7 @@ popupContainer.addEventListener('submit', (EventTarget) => {
   }
 )
 
-popupCloseButton.forEach( (item) => {
+popupCloseButtons.forEach( (item) => {
     item.addEventListener('click', () => {
       closePopup()
     })
