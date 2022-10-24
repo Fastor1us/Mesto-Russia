@@ -15,10 +15,6 @@
   top: 1px;
 }
 
-.cards__button-like:checked::before {
-  background: url(../../../images/heart_active.svg) no-repeat center;
-}
-
 .cards__button-like:hover {
   opacity: .5;
 }

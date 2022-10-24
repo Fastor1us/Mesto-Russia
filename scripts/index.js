@@ -106,6 +106,8 @@ function openPopup (item) {
   if (item.hasAttribute('src')) {
     popupFigure.classList.add('popup_opened')
     popup.querySelector('.popup__image').src = item.src
+    popup.querySelector('.popup__image').alt = item.parentElement.querySelector('.cards__title').textContent
+    popup.querySelector('.popup__figcaption').textContent = item.parentElement.querySelector('.cards__title').textContent
   } else {
     item.classList.add('popup_opened')
   }
@@ -129,6 +131,7 @@ function addCard () {
   cardElement.querySelector('.cards__title').textContent = popupInputs[0].value
 
   wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
+  ButtonLikeHandler(cardElement.querySelector('.cards__button-like'))
   imageClickHandler(cardElement.querySelector('.cards__image'))
 
   cardsContainer.prepend(cardElement)
@@ -144,6 +147,7 @@ function addInitialCards (cardsArray) {
     cardElement.querySelector('.cards__title').textContent = item.name
 
     wastebasketHandler(cardElement.querySelector('.cards__wastebasket'))
+    ButtonLikeHandler(cardElement.querySelector('.cards__button-like'))
     imageClickHandler(cardElement.querySelector('.cards__image'))
 
     cardsContainer.append(cardElement)
@@ -163,6 +167,17 @@ function wastebasketHandler (item) {
   item.addEventListener('click',
   function () {
     item.parentElement.remove()
+  })
+}
+
+function ButtonLikeHandler (item) {
+  item.addEventListener('click',
+  function () {
+    item.classList.toggle('cards__button-like_active')
+  })
+  item.addEventListener('mouseout',
+  function () {
+    item.blur()
   })
 }
 
