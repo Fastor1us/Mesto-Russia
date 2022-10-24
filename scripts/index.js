@@ -83,15 +83,6 @@ popupContainer.addEventListener('submit', (EventTarget) => {
   }
 )
 
-document.querySelectorAll('.cards__button-like').forEach(
-  function(item) {
-    item.addEventListener('click',
-    function () {
-      item.blur()
-    })
-  }
-)
-
 popupCloseButton.forEach( (item) => {
     item.addEventListener('click', () => {
       closePopup()
@@ -104,10 +95,13 @@ popupCloseButton.forEach( (item) => {
 function openPopup (item) {
   popup.classList.add('popup_opened')
   if (item.hasAttribute('src')) {
+    const popupImage = popup.querySelector('.popup__image')
+    const cardTitleTextContent = item.parentElement.querySelector('.cards__title').textContent
+
     popupFigure.classList.add('popup_opened')
-    popup.querySelector('.popup__image').src = item.src
-    popup.querySelector('.popup__image').alt = item.parentElement.querySelector('.cards__title').textContent
-    popup.querySelector('.popup__figcaption').textContent = item.parentElement.querySelector('.cards__title').textContent
+    popupImage.src = item.src
+    popupImage.alt = cardTitleTextContent
+    popup.querySelector('.popup__figcaption').textContent = cardTitleTextContent
   } else {
     item.classList.add('popup_opened')
   }
