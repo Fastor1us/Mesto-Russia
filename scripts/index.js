@@ -50,11 +50,11 @@ const cardTemplate = document.querySelector('#card-template').content
 
 const cardsContainer = document.querySelector('.cards__list')
 
-let currentOpenedPopup
+const escapeKey = 'Escape'
 
 /********************   ACTIONS   ********************/
 
-initialCards.forEach( (card) => {
+initialCards.forEach( card => {
   cardsContainer.append(addCard(card.name, card.link))
 })
 
@@ -68,56 +68,56 @@ profileAddButton.addEventListener('click', () => {
   openPopup(popupCardContainer)
 })
 
-popupCloseButtons.forEach( (item) => {
+popupCloseButtons.forEach( item => {
   item.addEventListener('click', () => {
-    // closePopup(item.closest('.popup'))
-    closePopup()
+    closePopup(item.closest('.popup'))
   })
 })
 
-
-cardsContainer.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('cards__button-like')) {
-    evt.target.classList.toggle('cards__button-like_active')
-    evt.target.blur()
-  }
-  if (evt.target.classList.contains('cards__wastebasket')) {
-    evt.target.closest('.cards__item').remove()
-  }
-  if (evt.target.classList.contains('cards__image')) {
-    openPopup(popupImageContainer)
-    popupImage.setAttribute('src', evt.target.getAttribute('src'))
-    popupImage.setAttribute('alt', evt.target.closest('.cards__item').querySelector('.cards__title').textContent)
-    popupFigcaption.textContent = evt.target.closest('.cards__item').querySelector('.cards__title').textContent
-  }
+cardsContainer.addEventListener('click', evt => {
+  addButtonLikeHandler(evt)
+  addWastebasketHandler(evt)
+  addCardImageHandler(evt)
 })
 
-
-popupProfileContainer.addEventListener('submit', (evt) => {
+popupProfileContainer.addEventListener('submit', evt => {
   evt.preventDefault()
   profileTitle.textContent = popupProfileInputName.value
   profileSubtitle.textContent = popupProfileInputDescription.value
-  // closePopup(popupProfileContainer)
-  closePopup()
+  closePopup(popupProfileContainer)
 })
 
-popupCardContainer.addEventListener('submit', (evt) => {
+popupCardContainer.addEventListener('submit', evt => {
   evt.preventDefault()
   cardsContainer.prepend(addCard(popupCardName.value, popupCardLink.value))
   evt.target.reset()
-  // closePopup(popupCardContainer)
-  closePopup()
+  closePopup(popupCardContainer)
+})
+
+document.addEventListener('keydown', evt => {
+  if (evt.key === escapeKey && isPopupOpened()) {
+    closePopup(document.querySelector('.popup_opened'))
+  }
+})
+
+document.addEventListener('click', evt => {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(document.querySelector('.popup_opened'))
+  }
 })
 
 /********************   FUNCTIONS   ********************/
 
 function openPopup(popupNode) {
   popupNode.classList.add('popup_opened')
-  currentOpenedPopup = popupNode
 }
 
-function closePopup() {
-  currentOpenedPopup.classList.remove('popup_opened')
+function closePopup(popupNode) {
+  popupNode.classList.remove('popup_opened')
+}
+
+function isPopupOpened() {
+  if (document.querySelector('.popup_opened')) { return true } else { return false }
 }
 
 function addCard(name, link) {
@@ -128,54 +128,29 @@ function addCard(name, link) {
   cardImage.setAttribute('alt', name)
   cardImage.setAttribute('src', link)
 
-  // addWastebasketHandler(cardElement.querySelector('.cards__wastebasket'), cardElement)
-  // addCardImageHandler(cardImage, name, link)
-  // addButtonLikeHandler(cardElement.querySelector('.cards__button-like'))
-
   return cardElement
 }
 
-// function addWastebasketHandler(itemNode, elementToRemove) {
-//   itemNode.addEventListener('click',
-//     function () {
-//       elementToRemove.remove()
-//   })
-// }
-
-// function addCardImageHandler(imageNode, name, link) {
-//   imageNode.addEventListener('click', () => {
-//     openPopup(popupImageContainer)
-//     popupImage.setAttribute('src', link)
-//     popupImage.setAttribute('alt', name)
-//     popupFigcaption.textContent = name
-//   })
-// }
-
-// function addButtonLikeHandler (itemNode) {
-//   itemNode.addEventListener('click',
-//     function () {
-//       itemNode.classList.toggle('cards__button-like_active')
-//   })
-//   itemNode.addEventListener('mouseout',
-//     function () {
-//       itemNode.blur()
-//   })
-// }
-
-
-
-// Завернуть в функцию и повесить на currentOpenedPopup NODE
-document.addEventListener('keydown', closePopupHanderKeydown)
-function closePopupHanderKeydown (evt) {
-  if (evt.key === 'Escape') {
-    closePopup()
+function addButtonLikeHandler (evt) {
+  const isLikeBtn = evt.target.classList.contains('cards__button-like')
+  if (isLikeBtn) {
+    evt.target.classList.toggle('cards__button-like_active')
+    evt.target.blur()
   }
 }
 
-document.addEventListener('click', closePopupHanderClick)
-function closePopupHanderClick (evt) {
-  console.log(evt.target)
-  if (evt.target.classList.contains('popup')) {
-    closePopup()
+function addWastebasketHandler (evt) {
+  const ifWastebasketBtn = evt.target.classList.contains('cards__wastebasket')
+  if (ifWastebasketBtn) {
+    evt.target.closest('.cards__item').remove()
+  }
+}
+
+function addCardImageHandler (evt) {
+  if (evt.target.classList.contains('cards__image')) {
+    openPopup(popupImageContainer)
+    popupImage.setAttribute('src', evt.target.getAttribute('src'))
+    popupImage.setAttribute('alt', evt.target.closest('.cards__item').querySelector('.cards__title').textContent)
+    popupFigcaption.textContent = evt.target.closest('.cards__item').querySelector('.cards__title').textContent
   }
 }
