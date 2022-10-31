@@ -6,11 +6,11 @@
   font-size: 14px;
   line-height: 17px;
   background-color: white;
+  margin-bottom: 5px;
 }
 
 .popup__text-input:first-of-type {
-  margin-top: 54px;
-  margin-bottom: 30px;
+  margin-top: 50px;
 }
 
 .popup__text-input:focus {
@@ -20,6 +20,6 @@
 
 @media (max-width: 470px) {
   .popup__text-input:first-of-type {
-    margin-top: calc(50px - (470px - 100vw)/((470 - 320)/(50 - 75)));
+    margin-top: calc(50px - (470px - 100vw)/((470 - 320)/(50 - 60)));
   }
 }

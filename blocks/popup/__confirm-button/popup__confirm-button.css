@@ -1,5 +1,5 @@
 .popup__confirm-button {
-  margin-top: 49px;
+  margin-top: 18px;
   width: 100%;
   min-height: 50px;
   background-color: black;
@@ -19,7 +19,7 @@
 
 @media (max-width: 470px) {
   .popup__confirm-button {
-    margin-top: calc(48px - (470px - 100vw)/((470 - 320)/(48 - 45)));
+    margin-top: calc(18px - (470px - 100vw)/((470 - 320)/(18 - 24)));
     font-size: calc(18px - (470px - 100vw)/((470 - 320)/(18 - 14)));
     line-height: calc(22px - (470px - 100vw)/((470 - 320)/(22 - 17)));
   }

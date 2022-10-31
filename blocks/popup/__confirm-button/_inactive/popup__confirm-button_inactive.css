@@ -1,0 +1,14 @@
+.popup__confirm-button_inactive {
+  background-color: #fff;
+  color: #000;
+  outline: 1px solid #000;
+  opacity: .2;
+}
+
+.popup__confirm-button_inactive:hover {
+  background-color: #fff;
+}
+
+.popup__confirm-button_inactive:focus {
+  background-color: #fff;
+}

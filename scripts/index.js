@@ -1,4 +1,10 @@
+/********************   IMPORTS   ********************/
+
+import { } from './validate.js'
+
+
 /********************   DATA   ********************/
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -52,6 +58,7 @@ const cardsContainer = document.querySelector('.cards__list')
 
 const escapeKey = 'Escape'
 
+
 /********************   ACTIONS   ********************/
 
 initialCards.forEach( card => {
@@ -60,8 +67,13 @@ initialCards.forEach( card => {
 
 profileEditButton.addEventListener('click', () => {
   openPopup(popupProfileContainer)
+
   popupProfileInputName.value = profileTitle.textContent
   popupProfileInputDescription.value = profileSubtitle.textContent
+
+  var eventInput = new Event('input')
+  popupProfileInputName.dispatchEvent(eventInput)
+  popupProfileInputDescription.dispatchEvent(eventInput)
 })
 
 profileAddButton.addEventListener('click', () => {
@@ -100,11 +112,12 @@ document.addEventListener('keydown', evt => {
   }
 })
 
-document.addEventListener('click', evt => {
+document.addEventListener('mousedown', evt => {
   if (evt.target.classList.contains('popup')) {
     closePopup(document.querySelector('.popup_opened'))
   }
 })
+
 
 /********************   FUNCTIONS   ********************/
 
