@@ -1,15 +1,15 @@
- enableValidation()
+import { validationData } from '../index.js'
 
- function enableValidation () {
-  const formList = Array.from(document.querySelectorAll('.popup__form'))
+export function enableValidation (validationData) {
+  const formList = Array.from(document.querySelectorAll(validationData.formSelector))
   formList.forEach( (formElement) => {
     setEventListeners(formElement)
   })
 }
 
 function setEventListeners (formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__text-input'))
-  const buttonElement = formElement.querySelector('.popup__confirm-button')
+  const inputList = Array.from(formElement.querySelectorAll(validationData['inputSelector']))
+  const buttonElement = formElement.querySelector(validationData.submitButtonSelector)
   toggleButtonState(inputList, buttonElement)
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
@@ -21,10 +21,10 @@ function setEventListeners (formElement) {
 
 function toggleButtonState (inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__confirm-button_inactive')
+    buttonElement.classList.add(validationData.inactiveButtonClass)
     buttonElement.setAttribute('disabled', true)
   } else {
-    buttonElement.classList.remove('popup__confirm-button_inactive')
+    buttonElement.classList.remove(validationData.inactiveButtonClass)
     buttonElement.removeAttribute('disabled')
   }
 }
@@ -45,14 +45,14 @@ function checkInputValidity (formElement, inputElement) {
 
 function showInputError (formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
-  inputElement.classList.add('popup__text-input_type_error')
+  inputElement.classList.add(validationData.inputErrorClass)
   errorElement.textContent = errorMessage
   errorElement.classList.add('popup__input-error_active')
 };
 
 function hideInputError (formElement, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
-  inputElement.classList.remove('popup__text-input_type_error')
+  inputElement.classList.remove(validationData.inputErrorClass)
   errorElement.classList.remove('popup__input-error_active')
   errorElement.textContent = ''
 }
