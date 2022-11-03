@@ -1,0 +1,5 @@
+*.zip
+*.7z
+*.pdn
+node_modules
+dist
