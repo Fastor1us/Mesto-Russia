@@ -8,7 +8,7 @@ export function enableValidation (validationData) {
 }
 
 function setEventListeners (formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(validationData['inputSelector']))
+  const inputList = Array.from(formElement.querySelectorAll(validationData.inputSelector))
   const buttonElement = formElement.querySelector(validationData.submitButtonSelector)
   toggleButtonState(inputList, buttonElement)
   inputList.forEach((inputElement) => {

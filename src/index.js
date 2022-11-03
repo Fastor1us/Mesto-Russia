@@ -1,13 +1,14 @@
 /********************   IMPORTS   ********************/
 
+import {} from './pages/index.css'
+
 import { enableValidation } from './scripts/validate.js'
 
 import { addCard } from './scripts/card.js'
 
-import { openPopup, closePopup, isPopupOpened, adjustOpenedProfilePopup } from './scripts/modal.js'
+import { openPopup, closePopup, adjustOpenedProfilePopup, setPopupCloseListener } from './scripts/modal.js'
 
 import { addButtonLikeHandler, addWastebasketHandler, addCardImageHandler, setProfileData } from './scripts/utils.js'
-
 
 
 /********************   DATA   ********************/
@@ -49,8 +50,6 @@ const popupCardContainer = document.querySelector('#popup-card')
 const popupCardName = popupCardContainer.querySelector('#popup-card-name')
 const popupCardLink = popupCardContainer.querySelector('#popup-card-link')
 
-const popupImageContainer = document.querySelector('#popup-image')
-
 const profile = document.querySelector('.profile')
 const profileTitle = profile.querySelector('.profile__title')
 const profileSubtitle = profile.querySelector('.profile__subtitle')
@@ -58,8 +57,6 @@ const profileEditButton = profile.querySelector('.profile__edit-button')
 const profileAddButton = profile.querySelector('.profile__add-button')
 
 const cardsContainer = document.querySelector('.cards__list')
-
-const escapeKey = 'Escape'
 
 
 /********************   ACTIONS   ********************/
@@ -81,6 +78,7 @@ initialCards.forEach( card => {
 
 profileEditButton.addEventListener('click', () => {
   openPopup(popupProfileContainer)
+  setPopupCloseListener()
   adjustOpenedProfilePopup(
     popupProfileInputName,
     popupProfileInputDescription,
@@ -91,6 +89,7 @@ profileEditButton.addEventListener('click', () => {
 
 profileAddButton.addEventListener('click', () => {
   openPopup(popupCardContainer)
+  setPopupCloseListener()
 })
 
 popupCloseButtons.forEach( item => {
@@ -116,18 +115,6 @@ popupCardContainer.addEventListener('submit', evt => {
   cardsContainer.prepend(addCard(popupCardName.value, popupCardLink.value))
   evt.target.reset()
   closePopup(popupCardContainer)
-})
-
-document.addEventListener('keydown', evt => {
-  if (evt.key === escapeKey && isPopupOpened()) {
-    closePopup(document.querySelector('.popup_opened'))
-  }
-})
-
-document.addEventListener('mousedown', evt => {
-  if (evt.target.classList.contains('popup')) {
-    closePopup(document.querySelector('.popup_opened'))
-  }
 })
 
 
