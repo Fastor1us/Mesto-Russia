@@ -1,6 +1,6 @@
 /********************   IMPORTS   ********************/
 
-// import {} from './pages/index.css'
+import {} from './pages/index.css'
 
 import { enableValidation } from './scripts/validate.js'
 
