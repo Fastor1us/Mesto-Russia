@@ -29,7 +29,7 @@
 .popup__title{align-self:flex-start;font-size:24px;font-weight:900;line-height:29px;margin:30px 0 0;max-width:100%;min-height:23px}@media (max-width:470px){.popup__title{font-size:calc(5.2px + 4vw);line-height:calc(7.06667px + 4.66667vw);margin-top:calc(14.33333px + 3.33333vw)}}
 .popup__text-input{background-color:#fff;border:none;border-bottom:1px solid rgba(0,0,0,.2);font-size:14px;line-height:17px;margin-bottom:5px;padding:0 0 9px;width:100%}.popup__text-input:first-of-type{margin-top:50px}.popup__text-input:focus{box-shadow:none;outline:none}@media (max-width:470px){.popup__text-input:first-of-type{margin-top:calc(81.33333px - 6.66667vw)}}
 .popup__text-input_type_error{border-bottom:1px solid red}
-.popup__input-error{align-self:flex-start;color:red;font-size:12px;height:30px;line-height:15px;visibility:hidden}
+.popup__input-error{align-self:flex-start;color:red;font-size:12px;line-height:15px;min-height:30px;visibility:hidden}
 .popup__input-error_active{visibility:visible}
 .popup__confirm-button{background-color:#000;border-radius:2px;color:#fff;font-size:18px;line-height:22px;margin-top:18px;min-height:50px;width:100%}.popup__confirm-button:focus,.popup__confirm-button:hover{background-color:rgba(0,0,0,.8)}@media (max-width:470px){.popup__confirm-button{font-size:calc(5.46667px + 2.66667vw);line-height:calc(6.33333px + 3.33333vw);margin-top:calc(36.8px - 4vw)}}
 .popup__confirm-button_inactive{background-color:#fff;color:#000;opacity:.2;outline:1px solid #000}.popup__confirm-button_inactive:focus,.popup__confirm-button_inactive:hover{background-color:#fff}
