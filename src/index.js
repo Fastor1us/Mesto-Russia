@@ -2,11 +2,11 @@
 
 import {} from './pages/index.css'
 
-import { enableValidation } from './scripts/validate.js'
+import { enableValidation, toggleButtonState } from './scripts/validate.js'
 
 import { addCard } from './scripts/card.js'
 
-import { openPopup, closePopup, adjustOpenedProfilePopup, setPopupCloseListener } from './scripts/modal.js'
+import { openPopup, closePopup, adjustOpenedProfilePopup } from './scripts/modal.js'
 
 import { addButtonLikeHandler, addWastebasketHandler, addCardImageHandler, setProfileData } from './scripts/utils.js'
 
@@ -78,7 +78,6 @@ initialCards.forEach( card => {
 
 profileEditButton.addEventListener('click', () => {
   openPopup(popupProfileContainer)
-  setPopupCloseListener()
   adjustOpenedProfilePopup(
     popupProfileInputName,
     popupProfileInputDescription,
@@ -89,7 +88,7 @@ profileEditButton.addEventListener('click', () => {
 
 profileAddButton.addEventListener('click', () => {
   openPopup(popupCardContainer)
-  setPopupCloseListener()
+  toggleButtonState([popupCardName, popupCardLink], popupCardContainer.querySelector(validationData.submitButtonSelector), validationData)
 })
 
 popupCloseButtons.forEach( item => {
