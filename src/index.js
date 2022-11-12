@@ -1,6 +1,6 @@
 /********************   IMPORTS   ********************/
 
-import {} from './pages/index.css'
+// import {} from './pages/index.css'
 
 import { enableValidation, toggleButtonState } from './scripts/validate.js'
 
@@ -13,32 +13,32 @@ import { addButtonLikeHandler, addWastebasketHandler, addCardImageHandler, setPr
 
 /********************   DATA   ********************/
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+// const initialCards = [
+//   {
+//     name: 'Архыз',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+//   },
+//   {
+//     name: 'Челябинская область',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+//   },
+//   {
+//     name: 'Иваново',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+//   },
+//   {
+//     name: 'Камчатка',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+//   },
+//   {
+//     name: 'Холмогорский район',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+//   },
+//   {
+//     name: 'Байкал',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+//   }
+// ];
 
 const popupCloseButtons = document.querySelectorAll('.popup__close-button')
 
@@ -72,9 +72,14 @@ export const validationData = {
 
 enableValidation(validationData)
 
-initialCards.forEach( card => {
-  cardsContainer.append(addCard(card.name, card.link))
-})
+// initialCards.forEach( card => {
+//   cardsContainer.append(addCard(card.name, card.link))
+// })
+
+
+// document.body.innerHTML = ""
+
+getInitialCards ()
 
 profileEditButton.addEventListener('click', () => {
   openPopup(popupProfileContainer)

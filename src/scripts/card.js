@@ -1,12 +1,12 @@
 const cardTemplate = document.querySelector('#card-template').content
 
-export function addCard(name, link) {
+export function addCard(card) {
   const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true)
   const cardImage = cardElement.querySelector('.cards__image')
 
-  cardElement.querySelector('.cards__title').textContent = name
-  cardImage.setAttribute('alt', name)
-  cardImage.setAttribute('src', link)
+  cardElement.querySelector('.cards__title').textContent = card.name
+  cardImage.setAttribute('alt', card.name)
+  cardImage.setAttribute('src', card.link)
 
   return cardElement
 }

@@ -30,6 +30,7 @@
 @import url(../blocks/cards/__button-like/cards__button-like.css);
 @import url(../blocks/cards/__button-like/_active/cards__button-like_active.css);
 @import url(../blocks/cards/__wastebasket/cards__wastebasket.css);
+@import url(../blocks/cards/__wastebasket/_hidden/cards__wastebasket_hidden.css);
 
 /* Секция, блок footer  */
 @import url(../blocks/footer/footer.css);
