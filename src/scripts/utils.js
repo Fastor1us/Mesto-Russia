@@ -1,24 +1,9 @@
-function addButtonLikeHandler (evt) {
-  const isLikeBtn = evt.target.classList.contains('cards__button-like')
-  if (isLikeBtn) {
-    evt.target.classList.toggle('cards__button-like_active')
-    evt.target.blur()
-  }
-}
-
-function addWastebasketHandler (evt) {
-  const ifWastebasketBtn = evt.target.classList.contains('cards__wastebasket')
-  if (ifWastebasketBtn) {
-    evt.target.closest('.cards__item').remove()
-  }
-}
-
 const popupImage = document.querySelector('.popup__image')
 const popupImageContainer = document.querySelector('#popup-image')
 const popupFigcaption = document.querySelector('.popup__figcaption')
 import { openPopup, setPopupCloseListener } from './modal.js'
 
-function addCardImageHandler (evt) {
+function addCardPopupImageHandler (evt) {
   if (evt.target.classList.contains('cards__image')) {
     openPopup(popupImageContainer)
     setPopupCloseListener()
@@ -29,8 +14,19 @@ function addCardImageHandler (evt) {
 }
 
 function setProfileData (profileTitleNode, nameInputValue, profileSubtitleNode, descriptionInputValue) {
-  profileTitleNode.textContent = nameInputValue.value
-  profileSubtitleNode.textContent = descriptionInputValue.value
+  profileTitleNode.textContent = nameInputValue
+  profileSubtitleNode.textContent = descriptionInputValue
 }
 
-export { addButtonLikeHandler, addWastebasketHandler, addCardImageHandler, setProfileData }
+let popupBtnText
+function renderLoading(isLoading, popupNode) {
+  const btnNode = popupNode.querySelector('.popup__confirm-button')
+  if (isLoading) {
+    popupBtnText = btnNode.textContent
+    btnNode.textContent = "Сохранение..."
+  } else {
+    setTimeout(() => { btnNode.textContent = popupBtnText }, 1000)
+  }
+}
+
+export { addCardPopupImageHandler, setProfileData, renderLoading }

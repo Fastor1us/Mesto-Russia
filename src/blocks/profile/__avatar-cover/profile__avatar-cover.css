@@ -1,0 +1,16 @@
+/* .profile__avatar-cover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: 47px;
+  left: 47px;
+  background-size: 100% 100%;
+
+  background: url(../../../images/pen.svg) no-repeat center;
+}
+
+.profile__avatar-cover {
+  background-color: white;
+} */
