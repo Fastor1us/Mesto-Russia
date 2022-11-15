@@ -5,7 +5,6 @@ const config = {
     'Content-Type': 'application/json'
   }
 }
-
 function getInitialCards () {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
