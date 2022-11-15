@@ -1,3 +1,7 @@
 .cards__wastebasket_hidden {
   visibility: hidden;
 }
+
+.cards__wastebasket_hidden:hover {
+  visibility: visible;
+}

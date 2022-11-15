@@ -4,7 +4,6 @@ export function enableValidation (validationData) {
     setEventListeners(formElement, validationData)
   })
 }
-
 function setEventListeners (formElement, validationData) {
   const inputList = Array.from(formElement.querySelectorAll(validationData.inputSelector))
   const buttonElement = formElement.querySelector(validationData.submitButtonSelector)

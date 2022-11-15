@@ -1,5 +1,4 @@
 /********************   IMPORTS   ********************/
-
 // import {} from './pages/index.css'
 
 import { enableValidation, toggleButtonState } from './scripts/validate.js'

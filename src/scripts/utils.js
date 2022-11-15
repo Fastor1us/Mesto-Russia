@@ -2,7 +2,6 @@ const popupImage = document.querySelector('.popup__image')
 const popupImageContainer = document.querySelector('#popup-image')
 const popupFigcaption = document.querySelector('.popup__figcaption')
 const myId = '64f46ca616b76212f1a053a1'
-
 import { openPopup } from './modal.js'
 
 function addCardPopupImageHandler (evt) {

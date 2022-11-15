@@ -2,7 +2,6 @@
 @import url(../vendor/fonts.css);
 /* Сброс базовых стилей и общая стилизация кнопок */
 @import url(../blocks/button/button.css);
-
 /* Прародитель, блок page */
 @import url(../blocks/page/page.css);
 

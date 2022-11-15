@@ -17,7 +17,6 @@ function getInitialCards () {
       }
     })
 }
-
 function getProfileData () {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers

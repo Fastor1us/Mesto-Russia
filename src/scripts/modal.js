@@ -2,7 +2,6 @@ function openPopup(popupNode) {
   popupNode.classList.add('popup_opened')
   setPopupCloseListener()
 }
-
 function closePopup(popupNode) {
   popupNode.classList.remove('popup_opened')
   removePopupCloseListener()

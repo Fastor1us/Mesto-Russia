@@ -1,5 +1,4 @@
 import { myId, addCardPopupImageHandler, addWastebasketHandler, adjustLikeStation, changeLikeState } from "./utils.js"
-
 const cardTemplate = document.querySelector('#card-template').content
 
 export function addCard(data) {
