@@ -1,16 +1,32 @@
-/* .profile__avatar-cover::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 26px;
-  height: 26px;
-  top: 47px;
-  left: 47px;
-  background-size: 100% 100%;
-
-  background: url(../../../images/pen.svg) no-repeat center;
+.profile__avatar-cover {
+  position: relative;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin-right: 30px;
 }
 
-.profile__avatar-cover {
-  background-color: white;
-} */
+.profile__avatar-cover:hover::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 0;
+  background-size: 100% 100%;
+  background: url(../../../images/pen.svg) no-repeat center, linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8));
+}
+
+@media (min-width: 470px) and (max-width: 670px) {
+  .profile__avatar-cover {
+    margin-right: calc(30px - (670px - 100vw)/((670 - 470)/(30 - 15)));
+  }
+}
+
+@media (max-width: 470px) {
+  .profile__avatar-cover {
+    margin-right: 0;
+    margin-bottom: 26px;
+  }
+}

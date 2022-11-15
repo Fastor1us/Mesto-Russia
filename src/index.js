@@ -4,11 +4,11 @@
 
 import { enableValidation, toggleButtonState } from './scripts/validate.js'
 
-import { addCard, cardID, nodeToDelete } from './scripts/card.js'
+import { addCard } from './scripts/card.js'
 
 import { openPopup, closePopup, adjustOpenedProfilePopup } from './scripts/modal.js'
 
-import { setProfileData, renderLoading } from './scripts/utils.js'
+import { setProfileData, renderLoading, cardID, nodeToDelete } from './scripts/utils.js'
 
 import { getInitialCards, getProfileData, patchProfileData, postNewCard, deleteCard, patchAvatar } from './scripts/api.js'
 
@@ -30,7 +30,8 @@ const popupCardLink = popupCardContainer.querySelector('#popup-card-link')
 const popupDeleteContainer = document.querySelector('#popup-delete')
 
 const profile = document.querySelector('.profile')
-const pfofileAvatar = document.querySelector('.profile__avatar')
+const pfofileAvatar = profile.querySelector('.profile__avatar')
+const profileAvatarCover = profile.querySelector('.profile__avatar-cover')
 const profileTitle = profile.querySelector('.profile__title')
 const profileSubtitle = profile.querySelector('.profile__subtitle')
 const profileEditButton = profile.querySelector('.profile__edit-button')
@@ -72,7 +73,7 @@ getInitialCards()
     console.log(err)
 })
 
-pfofileAvatar.addEventListener('click', () => {
+profileAvatarCover.addEventListener('click', () => {
   openPopup(popupAvatar)
 })
 
@@ -104,8 +105,10 @@ popupAvatar.addEventListener('submit', evt => {
     .then( data => {
       pfofileAvatar.src = data.avatar
     })
-  renderLoading(true, popupAvatar)
-  closePopup(popupAvatar)
+    .finally( () => {
+      renderLoading(false, popupAvatar)
+      closePopup(popupAvatar)
+    })
 })
 
 popupProfileContainer.addEventListener('submit', evt => {
@@ -118,8 +121,10 @@ popupProfileContainer.addEventListener('submit', evt => {
     .catch( err => {
       console.log(err)
     })
-    .finally( () => { renderLoading(false, popupProfileContainer) } )
-  closePopup(popupProfileContainer)
+    .finally( () => {
+      renderLoading(false, popupProfileContainer)
+      closePopup(popupProfileContainer)
+    })
 })
 
 popupCardContainer.addEventListener('submit', evt => {
@@ -132,9 +137,11 @@ popupCardContainer.addEventListener('submit', evt => {
     .catch( err => {
       console.log(err)
     })
-  evt.target.reset()
-  renderLoading(true, popupCardContainer)
-  closePopup(popupCardContainer)
+    .finally( () => {
+      evt.target.reset()
+      renderLoading(true, popupCardContainer)
+      closePopup(popupCardContainer)
+    })
 })
 
 popupDeleteContainer.addEventListener('submit', evt => {
@@ -147,8 +154,10 @@ popupDeleteContainer.addEventListener('submit', evt => {
     .catch( err =>{
       console.log(err)
     })
-  renderLoading(true, popupDeleteContainer)
-  closePopup(popupDeleteContainer)
+    .finally( () => {
+      renderLoading(true, popupDeleteContainer)
+      closePopup(popupDeleteContainer)
+    })
 })
 
 
