@@ -7,7 +7,7 @@
   background-color: white;
   color: black;
   width: 430px;
-  min-height: 330px;
+  /* min-height: 330px; */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -22,3 +22,4 @@
     width: calc(430px - (470px - 100vw)/((470 - 320)/(430 - 282)));
   }
 }
+

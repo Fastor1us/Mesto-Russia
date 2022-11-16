@@ -1,6 +1,5 @@
 /********************   IMPORTS   ********************/
-
-import {} from './pages/index.css'
+// import {} from './pages/index.css'
 
 import { enableValidation, toggleButtonState } from './scripts/validate.js'
 
@@ -8,39 +7,16 @@ import { addCard } from './scripts/card.js'
 
 import { openPopup, closePopup, adjustOpenedProfilePopup } from './scripts/modal.js'
 
-import { addButtonLikeHandler, addWastebasketHandler, addCardImageHandler, setProfileData } from './scripts/utils.js'
+import { setProfileData, renderLoading, cardID, nodeToDelete } from './scripts/utils.js'
+
+import { getInitialCards, getProfileData, patchProfileData, postNewCard, deleteCard, patchAvatar } from './scripts/api.js'
 
 
 /********************   DATA   ********************/
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const popupCloseButtons = document.querySelectorAll('.popup__close-button')
+
+const popupAvatar = document.querySelector('#popup-avatar')
 
 const popupProfileContainer = document.querySelector('#popup-profile')
 const popupProfileInputName = popupProfileContainer.querySelector('#popup-profile-title')
@@ -50,7 +26,11 @@ const popupCardContainer = document.querySelector('#popup-card')
 const popupCardName = popupCardContainer.querySelector('#popup-card-name')
 const popupCardLink = popupCardContainer.querySelector('#popup-card-link')
 
+const popupDeleteContainer = document.querySelector('#popup-delete')
+
 const profile = document.querySelector('.profile')
+const pfofileAvatar = profile.querySelector('.profile__avatar')
+const profileAvatarCover = profile.querySelector('.profile__avatar-cover')
 const profileTitle = profile.querySelector('.profile__title')
 const profileSubtitle = profile.querySelector('.profile__subtitle')
 const profileEditButton = profile.querySelector('.profile__edit-button')
@@ -72,8 +52,26 @@ export const validationData = {
 
 enableValidation(validationData)
 
-initialCards.forEach( card => {
-  cardsContainer.append(addCard(card.name, card.link))
+export let userID
+
+Promise.all([getProfileData, getInitialCards])
+  .then( ([userData, cardsData]) => {
+    userID = userData._id
+
+    pfofileAvatar.src = userData.avatar
+    profileTitle.textContent = userData.name
+    profileSubtitle.textContent = userData.about
+
+    cardsData.forEach( card => {
+      cardsContainer.append(addCard(card))
+    })
+  })
+  .catch( err => {
+    console.log(err)
+})
+
+profileAvatarCover.addEventListener('click', () => {
+  openPopup(popupAvatar)
 })
 
 profileEditButton.addEventListener('click', () => {
@@ -83,7 +81,7 @@ profileEditButton.addEventListener('click', () => {
     popupProfileInputDescription,
     profileTitle,
     profileSubtitle
-    )
+  )
 })
 
 profileAddButton.addEventListener('click', () => {
@@ -97,23 +95,66 @@ popupCloseButtons.forEach( item => {
   })
 })
 
-cardsContainer.addEventListener('click', evt => {
-  addButtonLikeHandler(evt)
-  addWastebasketHandler(evt)
-  addCardImageHandler(evt)
+popupAvatar.addEventListener('submit', evt => {
+  evt.preventDefault()
+  renderLoading(true, popupAvatar)
+  patchAvatar(document.querySelector('#popup-avatar-link').value)
+    .then( data => {
+      pfofileAvatar.src = data.avatar
+    })
+    .finally( () => {
+      renderLoading(false, popupAvatar)
+      closePopup(popupAvatar)
+    })
 })
 
 popupProfileContainer.addEventListener('submit', evt => {
   evt.preventDefault()
-  setProfileData(profileTitle, popupProfileInputName, profileSubtitle, popupProfileInputDescription)
-  closePopup(popupProfileContainer)
+  renderLoading(true, popupProfileContainer)
+  patchProfileData(popupProfileInputName.value, popupProfileInputDescription.value)
+    .then( data => {
+      setProfileData(profileTitle, data.name, profileSubtitle, data.about)
+    })
+    .catch( err => {
+      console.log(err)
+    })
+    .finally( () => {
+      renderLoading(false, popupProfileContainer)
+      closePopup(popupProfileContainer)
+    })
 })
 
 popupCardContainer.addEventListener('submit', evt => {
   evt.preventDefault()
-  cardsContainer.prepend(addCard(popupCardName.value, popupCardLink.value))
-  evt.target.reset()
-  closePopup(popupCardContainer)
+  renderLoading(true, popupCardContainer)
+  postNewCard(popupCardName.value, popupCardLink.value)
+    .then( data => {
+      cardsContainer.prepend(addCard(data))
+    })
+    .catch( err => {
+      console.log(err)
+    })
+    .finally( () => {
+      evt.target.reset()
+      renderLoading(false, popupCardContainer)
+      closePopup(popupCardContainer)
+    })
+})
+
+popupDeleteContainer.addEventListener('submit', evt => {
+  evt.preventDefault()
+  renderLoading(true, popupDeleteContainer)
+  deleteCard(cardID)
+    .then( () => {
+      nodeToDelete.remove()
+    })
+    .catch( err =>{
+      console.log(err)
+    })
+    .finally( () => {
+      renderLoading(false, popupDeleteContainer)
+      closePopup(popupDeleteContainer)
+    })
 })
 
 
