@@ -14,8 +14,8 @@
   height: 120px;
   top: 0;
   left: 0;
-  background-size: 100% 100%;
-  background: url(../../../images/pen.svg) no-repeat center, linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8));
+  background-size: cover;
+  background: url(../../../images/pen26.svg) no-repeat center, linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8));
 }
 
 @media (min-width: 470px) and (max-width: 670px) {

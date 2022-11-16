@@ -52,19 +52,17 @@ export const validationData = {
 
 enableValidation(validationData)
 
-getProfileData()
-  .then( data => {
-    pfofileAvatar.src = data.avatar
-    profileTitle.textContent = data.name
-    profileSubtitle.textContent = data.about
-  })
-  .catch( err => {
-    console.log(err)
-})
+export let userID
 
-getInitialCards()
-  .then( data => {
-    data.forEach( card => {
+Promise.all([getProfileData, getInitialCards])
+  .then( ([userData, cardsData]) => {
+    userID = userData._id
+
+    pfofileAvatar.src = userData.avatar
+    profileTitle.textContent = userData.name
+    profileSubtitle.textContent = userData.about
+
+    cardsData.forEach( card => {
       cardsContainer.append(addCard(card))
     })
   })
@@ -83,7 +81,7 @@ profileEditButton.addEventListener('click', () => {
     popupProfileInputDescription,
     profileTitle,
     profileSubtitle
-    )
+  )
 })
 
 profileAddButton.addEventListener('click', () => {
@@ -138,7 +136,7 @@ popupCardContainer.addEventListener('submit', evt => {
     })
     .finally( () => {
       evt.target.reset()
-      renderLoading(true, popupCardContainer)
+      renderLoading(false, popupCardContainer)
       closePopup(popupCardContainer)
     })
 })
@@ -154,7 +152,7 @@ popupDeleteContainer.addEventListener('submit', evt => {
       console.log(err)
     })
     .finally( () => {
-      renderLoading(true, popupDeleteContainer)
+      renderLoading(false, popupDeleteContainer)
       closePopup(popupDeleteContainer)
     })
 })

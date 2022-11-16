@@ -5,8 +5,8 @@ const config = {
     'Content-Type': 'application/json'
   }
 }
-function getInitialCards () {
-  return fetch(`${config.baseUrl}/cards`, {
+
+const getProfileData = fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
     .then(res => {
@@ -15,10 +15,9 @@ function getInitialCards () {
       } else {
         return Promise.reject(`Ошибка: ${res.status}`)
       }
-    })
-}
-function getProfileData () {
-  return fetch(`${config.baseUrl}/users/me`, {
+})
+
+const getInitialCards = fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
     .then(res => {
@@ -27,8 +26,7 @@ function getProfileData () {
       } else {
         return Promise.reject(`Ошибка: ${res.status}`)
       }
-    })
-}
+})
 
 function patchProfileData (nameOutput, aboutOutput) {
   return fetch(`${config.baseUrl}/users/me`, {

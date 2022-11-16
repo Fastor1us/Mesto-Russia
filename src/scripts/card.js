@@ -1,4 +1,5 @@
-import { myId, addCardPopupImageHandler, addWastebasketHandler, adjustLikeStation, changeLikeState } from "./utils.js"
+import { userID } from "../index.js"
+import { addCardPopupImageHandler, addWastebasketHandler, adjustLikeStation, changeLikeState } from "./utils.js"
 const cardTemplate = document.querySelector('#card-template').content
 
 export function addCard(data) {
@@ -12,7 +13,7 @@ export function addCard(data) {
 
   cardImage.addEventListener('click', addCardPopupImageHandler)
 
-  if (data.owner._id === myId) {
+  if (data.owner._id === userID) {
     cardWastebasket.classList.remove('cards__wastebasket_hidden')
     cardWastebasket.addEventListener('click', (evt) => addWastebasketHandler(evt, data, document.querySelector('#popup-delete')) )
   }

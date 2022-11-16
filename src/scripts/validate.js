@@ -4,6 +4,7 @@ export function enableValidation (validationData) {
     setEventListeners(formElement, validationData)
   })
 }
+
 function setEventListeners (formElement, validationData) {
   const inputList = Array.from(formElement.querySelectorAll(validationData.inputSelector))
   const buttonElement = formElement.querySelector(validationData.submitButtonSelector)
@@ -45,7 +46,7 @@ function showInputError (formElement, inputElement, errorMessage, validationData
   inputElement.classList.add(validationData.inputErrorClass)
   errorElement.textContent = errorMessage
   errorElement.classList.add('popup__input-error_active')
-};
+}
 
 function hideInputError (formElement, inputElement, validationData) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
