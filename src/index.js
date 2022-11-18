@@ -1,5 +1,5 @@
 /********************   IMPORTS   ********************/
-// import {} from './pages/index.css'
+import {} from './pages/index.css'
 
 import { enableValidation, toggleButtonState } from './scripts/validate.js'
 
@@ -101,10 +101,14 @@ popupAvatar.addEventListener('submit', evt => {
   patchAvatar(document.querySelector('#popup-avatar-link').value)
     .then( data => {
       pfofileAvatar.src = data.avatar
+      closePopup(popupAvatar)
+      evt.target.reset()
+    })
+    .catch( err => {
+      console.log(err)
     })
     .finally( () => {
       renderLoading(false, popupAvatar)
-      closePopup(popupAvatar)
     })
 })
 
@@ -114,13 +118,13 @@ popupProfileContainer.addEventListener('submit', evt => {
   patchProfileData(popupProfileInputName.value, popupProfileInputDescription.value)
     .then( data => {
       setProfileData(profileTitle, data.name, profileSubtitle, data.about)
+      closePopup(popupProfileContainer)
     })
     .catch( err => {
       console.log(err)
     })
     .finally( () => {
       renderLoading(false, popupProfileContainer)
-      closePopup(popupProfileContainer)
     })
 })
 
@@ -130,30 +134,30 @@ popupCardContainer.addEventListener('submit', evt => {
   postNewCard(popupCardName.value, popupCardLink.value)
     .then( data => {
       cardsContainer.prepend(addCard(data))
+      closePopup(popupCardContainer)
+      evt.target.reset()
     })
     .catch( err => {
       console.log(err)
     })
     .finally( () => {
-      evt.target.reset()
       renderLoading(false, popupCardContainer)
-      closePopup(popupCardContainer)
     })
 })
 
 popupDeleteContainer.addEventListener('submit', evt => {
   evt.preventDefault()
-  renderLoading(true, popupDeleteContainer)
+  renderLoading(true, popupDeleteContainer, "Удаление...")
   deleteCard(cardID)
     .then( () => {
       nodeToDelete.remove()
+      closePopup(popupDeleteContainer)
     })
     .catch( err =>{
       console.log(err)
     })
     .finally( () => {
       renderLoading(false, popupDeleteContainer)
-      closePopup(popupDeleteContainer)
     })
 })
 

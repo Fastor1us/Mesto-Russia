@@ -1,11 +1,11 @@
 function openPopup(popupNode) {
   popupNode.classList.add('popup_opened')
-  setPopupCloseListener()
+  setPopupCloseListener(popupNode)
 }
 
 function closePopup(popupNode) {
   popupNode.classList.remove('popup_opened')
-  removePopupCloseListener()
+  removePopupCloseListener(popupNode)
 }
 
 function adjustOpenedProfilePopup (name, description, title, subtitle) {
@@ -17,33 +17,30 @@ function adjustOpenedProfilePopup (name, description, title, subtitle) {
   description.dispatchEvent(eventInput)
 }
 
-function setPopupCloseListener() {
-  document.addEventListener('keydown', handlePopupCloseListener)
-  document.addEventListener('mousedown', handlePopupCloseListener)
+function setPopupCloseListener(popupNode) {
+  document.addEventListener('keydown', handlePopupCloseListenerKeydown)
+  popupNode.addEventListener('mousedown', handlePopupCloseListenerMousedown)
 }
 
-const escapeKey = 'Escape'
-
-function handlePopupCloseListener(evt) {
-  if (evt.type === 'keydown' && evt.key === escapeKey && isPopupOpened()) {
+function handlePopupCloseListenerKeydown(evt) {
+  if (evt.type === 'keydown' && evt.key === 'Escape') {
     closePopup(findOpenedPopup())
   }
+}
+
+function handlePopupCloseListenerMousedown(evt) {
   if (evt.type === 'mousedown' && evt.target.classList.contains('popup')) {
-    closePopup(findOpenedPopup())
+    closePopup(evt.target)
   }
-}
-
-function isPopupOpened() {
-  if (findOpenedPopup()) { return true } else { return false }
 }
 
 function findOpenedPopup () {
   return document.querySelector('.popup_opened')
 }
 
-function removePopupCloseListener() {
-  document.removeEventListener('keydown', handlePopupCloseListener)
-  document.removeEventListener('mousedown', handlePopupCloseListener)
+function removePopupCloseListener(popupNode) {
+  document.removeEventListener('keydown', handlePopupCloseListenerKeydown)
+  popupNode.removeEventListener('mousedown', handlePopupCloseListenerMousedown)
 }
 
-export { openPopup, closePopup, adjustOpenedProfilePopup, setPopupCloseListener }
+export { openPopup, closePopup, adjustOpenedProfilePopup }
