@@ -11,7 +11,7 @@ export function addCard(data) {
   cardImage.setAttribute('alt', data.name)
   cardImage.setAttribute('src', data.link)
 
-  cardImage.addEventListener('click', addCardPopupImageHandler)
+  cardImage.addEventListener('click', () => addCardPopupImageHandler(data))
 
   if (data.owner._id === userID) {
     cardWastebasket.classList.remove('cards__wastebasket_hidden')

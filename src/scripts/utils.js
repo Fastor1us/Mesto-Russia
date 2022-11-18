@@ -5,13 +5,11 @@ import { userID } from '../index.js'
 import { openPopup } from './modal.js'
 import { addLike, removeLike } from './api.js'
 
-function addCardPopupImageHandler (evt) {
-  if (evt.target.classList.contains('cards__image')) {
-    openPopup(popupImageContainer)
-    popupImage.setAttribute('src', evt.target.getAttribute('src'))
-    popupImage.setAttribute('alt', evt.target.closest('.cards__item').querySelector('.cards__title').textContent)
-    popupFigcaption.textContent = evt.target.closest('.cards__item').querySelector('.cards__title').textContent
-  }
+function addCardPopupImageHandler (data) {
+  openPopup(popupImageContainer)
+  popupImage.setAttribute('src', data.link)
+  popupImage.setAttribute('alt', data.name)
+  popupFigcaption.textContent = data.name
 }
 
 function setProfileData (profileTitleNode, nameInputValue, profileSubtitleNode, descriptionInputValue) {
@@ -20,12 +18,11 @@ function setProfileData (profileTitleNode, nameInputValue, profileSubtitleNode, 
 }
 
 let popupBtnText
-function renderLoading(isLoading, popupNode) {
+function renderLoading(isLoading, popupNode, renderText = "Сохранение...") {
   const btnNode = popupNode.querySelector('.popup__confirm-button')
   if (isLoading) {
     popupBtnText = btnNode.textContent
-    console.log(`первый раз ${popupBtnText}`)
-    btnNode.textContent = "Сохранение..."
+    btnNode.textContent = renderText
   } else {
     setTimeout(() => { btnNode.textContent = popupBtnText }, 1000)
   }
@@ -50,12 +47,18 @@ function changeLikeState (evt, data, likesCounter) {
       likesCounter.textContent = res.likes.length
       evt.target.blur()
     })
+    .catch( err => {
+      console.log(err)
+    })
   } else {
     addLike(data._id)
     .then( (res) => {
       evt.target.classList.add('cards__button-like_active')
       likesCounter.textContent = res.likes.length
       evt.target.blur()
+    })
+    .catch( err => {
+      console.log(err)
     })
   }
 }
