@@ -72,6 +72,7 @@ Promise.all([getProfileData, getInitialCards])
 
 profileAvatarCover.addEventListener('click', () => {
   openPopup(popupAvatar)
+  toggleButtonState([popupAvatar.querySelector(validationData.inputSelector)], popupAvatar.querySelector(validationData.submitButtonSelector), validationData)
 })
 
 profileEditButton.addEventListener('click', () => {
